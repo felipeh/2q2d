@@ -1,0 +1,182 @@
+\documentclass[11pt]{amsart}
+\usepackage{bm}
+\usepackage{amsmath,amsfonts, amsthm, amssymb}
+\usepackage[abbrev,backrefs]{amsrefs}
+%\usepackage{showlabels}
+\usepackage{microtype}
+\usepackage{enumerate}
+\usepackage{graphicx}
+%\usepackage{braket}
+\graphicspath{{../../figures/}}
+\usepackage[onehalfspacing]{setspace}
+
+%%%% for widecheck command
+% code from mathabx.sty and mathabx.dcl
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{5px}
+
+\usepackage{scalerel,stackengine}
+\def\apeqA{\SavedStyle\sim}
+\def\apeq{\setstackgap{L}{\dimexpr.5pt+1.5\LMpt}\ensurestackMath{%
+  \ThisStyle{\mathrel{\Centerstack{{\apeqA} {\apeqA} {\apeqA}}}}}}
+
+\def\bra#1{\mathinner{\langle{#1}|}}
+\def\ket#1{\mathinner{|{#1}\rangle}}
+\def\braket#1{\mathinner{\langle{#1}\rangle}}
+\def\Braket#1{\langle{#1}\rangle}
+
+\def\Real{{\mathbf R}}
+\def\Sphere{{\mathbf S}}
+\def\Schwartz{{\mathcal{S}}}
+\def\Lebesgue{{\mathcal{L}}}
+\def\Hausdorff{{\mathcal{H}}}
+\def\Prob{{\mathbf P}}
+\def\Var{{\mathbf{Var}\,}}
+\def\Expec{{\mathbb E\,}}
+\def\xp{{\mathbb E\,}}
+\def\RWExpec{{\mathbb E\,}}
+\def\eps{{\varepsilon}}
+\def\One{{\mathbf{1}}}
+
+\def\PhaseSpace{{\Real^{2d}}}
+\def\Evol{{\mathcal{E}}}
+\def\xop{{\mathbf{x}}}
+\def\pop{{\mathbf{p}}}
+\DeclareMathOperator{\Rec}{Rec}
+\DeclareMathOperator{\Err}{Err}
+\def\lsim{{\,\lesssim\,}}
+\def\llog{{\,\lessapprox\,}}
+
+% the Hilbert space
+\def\Hilbert{{\mathcal{H}}}
+
+\def\bbZ{{\mathbb{Z}}}
+\def\bbN{{\mathbb N}}
+
+\newcommand{\Wigner}[1]{{\mathcal{W}_{#1}}}
+\newcommand{\Ft}[1]{{\widehat{#1}}}
+\newcommand{\IFt}[1]{{\widecheck{#1}}}
+
+\newcommand{\ot}{{\leftarrow}}
+
+\newcommand{\weight}{{\mathrm{weight}}}
+\newcommand{\poly}{{\mathrm{poly}}}
+\newcommand{\Poly}{{\mathrm{Poly}}}
+
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\ad}{ad}
+\newcommand{\AD}{{\mathbf{ad}}}
+\newcommand{\F}{{\mathcal{F}}}
+\newcommand{\noset}{\varnothing}
+\newcommand{\mbf}[1]{{\mathbf{#1}}}
+\newcommand{\mcal}[1]{{\mathcal{#1}}}
+\newcommand{\wtild}[1]{{\widetilde{#1}}}
+\newcommand{\PathSet}{{\Pi}}
+\newcommand{\ddt}{{\frac{d}{dt}}}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+\DeclareMathOperator{\Op}{Op}
+\DeclareMathOperator{\Rept}{Re}
+\DeclareMathOperator{\Impt}{Im}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Variance}{Var}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\Div}{div}
+
+\DeclareMathOperator{\Arm}{arm}
+\DeclareMathOperator{\Stick}{stick}
+
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{hope}[theorem]{Potentially Provable Lemma}
+\newtheorem{assumption}{Useful Assumption}
+\hfuzz=20pt
+
+\title{Correlation of fluctuations}
+\date{\today}
+\begin{document}
+\maketitle
+
+I want to look at
+\[
+\xp (\mcal{D}[R]-\theta) R.
+\]
+Write
+\[
+R = M - M (\lambda V - \lambda^2 \theta) R.
+\]
+So
+\begin{align*}
+\xp (\mcal{D}[R]-\theta)R
+&= \xp (\mcal{D}[R]-\theta) M(\lambda V - \lambda^2\theta)R \\
+&= \lambda^2 \sum_x\xp \mcal{D}[R\delta_zR] M\delta_z R
++ \xp (\mcal{D}[R]-\theta)M(\mcal{D}[R]-\theta)R.
+\end{align*}
+The crossing term is what I'm curious about.
+
+Just for clarity, let's put an $M$ in the front, since that's usually where this comes up.
+If we compute an entry, one thing we can do for example is bound like so:
+\[
+\lambda^2 (M (\mcal{D}[R]-\theta)R)_{00} \lsim
+\lambda^2 \|M\|_{1\to 2} (\lambda) \|R\|_{1\to 2} \lsim \lambda
+\]
+(ok, taking $\eta\sim \lambda^2$).
+
+I want to see that
+\[
+\lambda^4 \xp(M \sum_z \mcal{D}[R\delta_zR]M\delta_z R)_{00}
+\]
+is much smaller.  One way to go about this is to try to bound $\|X\|_{2\to 2}$ where
+\[
+X_{xy} := R_{xy}^2 M_{xy}.
+\]
+But this is pretty bad...
+I guess what I want is that this is better than $\lambda^{-1}$, that would be the break-even with the previous bound.
+Well, I could do
+\[
+\|X\|_{2\to 2} \leq \max_x \sum_y |R_{xy}|^2 |M_{xy}|
+\leq (\sum_y |R_{xy}|^4)^{1/2} (\sum_y |M_{xy}|^2)^{1/2}.
+\]
+Well and I guess it's only the $\ell^4$ inside a kinetic ball, but that's still $O(1)$
+(right?).
+
+Could try instead for
+\[
+(\sum_y |R_{xy}|^3)^{2/3} (\sum_y |M_{xy}|^3)^{1/3}.
+\]
+And in high enough dimensions this is $O(1)$.
+
+
+It's just weird that I am only seeing an improvement in very high dimensions.
+
+\end{document}
