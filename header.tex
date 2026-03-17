@@ -1,0 +1,128 @@
+
+\usepackage{bm}
+\usepackage{amsmath,amsfonts, amsthm, amssymb}
+\usepackage[abbrev,backrefs]{amsrefs}
+%\usepackage{showlabels}
+\usepackage{microtype}
+\usepackage{enumerate}
+\usepackage{graphicx}
+%\usepackage{braket}
+\graphicspath{{../../figures/}}
+\usepackage[onehalfspacing]{setspace}
+
+%%%% for widecheck command
+% code from mathabx.sty and mathabx.dcl
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{5px}
+
+\usepackage{scalerel,stackengine}
+\def\apeqA{\SavedStyle\sim}
+\def\apeq{\setstackgap{L}{\dimexpr.5pt+1.5\LMpt}\ensurestackMath{%
+  \ThisStyle{\mathrel{\Centerstack{{\apeqA} {\apeqA} {\apeqA}}}}}}
+
+\def\bra#1{\mathinner{\langle{#1}|}}
+\def\ket#1{\mathinner{|{#1}\rangle}}
+\def\braket#1{\mathinner{\langle{#1}\rangle}}
+\def\Braket#1{\langle{#1}\rangle}
+
+\def\Real{{\mathbf R}}
+\def\Sphere{{\mathbf S}}
+\def\Schwartz{{\mathcal{S}}}
+\def\Lebesgue{{\mathcal{L}}}
+\def\Hausdorff{{\mathcal{H}}}
+\def\Prob{{\mathbf P}}
+\def\Var{{\mathbf{Var}\,}}
+\def\Expec{{\mathbb E\,}}
+\def\xp{{\mathbb E\,}}
+\def\RWExpec{{\mathbb E\,}}
+\def\eps{{\varepsilon}}
+\def\One{{\mathbf{1}}}
+
+\def\PhaseSpace{{\Real^{2d}}}
+\def\Evol{{\mathcal{E}}} \def\xop{{\mathbf{x}}}
+\def\pop{{\mathbf{p}}}
+\DeclareMathOperator{\Rec}{Rec}
+\DeclareMathOperator{\Err}{Err}
+\def\lsim{{\,\lesssim\,}}
+\def\llog{{\,\lessapprox\,}}
+
+% the Hilbert space
+\def\Hilbert{{\mathcal{H}}}
+
+\def\bbR{{\mathbb{R}}}
+\def\bbZ{{\mathbb{Z}}}
+\def\bbN{{\mathbb N}}
+\def\bbH{{\mathbb H}}
+
+\newcommand{\Wigner}[1]{{\mathcal{W}_{#1}}}
+\newcommand{\Ft}[1]{{\widehat{#1}}}
+\newcommand{\IFt}[1]{{\widecheck{#1}}}
+
+\newcommand{\ot}{{\leftarrow}}
+
+\newcommand{\weight}{{\mathrm{weight}}}
+\newcommand{\poly}{{\mathrm{poly}}}
+\newcommand{\Poly}{{\mathrm{Poly}}}
+
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\ad}{ad}
+\newcommand{\AD}{{\mathbf{ad}}}
+\newcommand{\F}{{\mathcal{F}}}
+\newcommand{\noset}{\varnothing}
+\newcommand{\mbf}[1]{{\mathbf{#1}}}
+\newcommand{\mcal}[1]{{\mathcal{#1}}}
+\newcommand{\wtild}[1]{{\widetilde{#1}}}
+\newcommand{\PathSet}{{\Pi}}
+\newcommand{\ddt}{{\frac{d}{dt}}}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+\DeclareMathOperator{\Op}{Op}
+\DeclareMathOperator{\Rept}{Re}
+\DeclareMathOperator{\Impt}{Im}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Variance}{Var}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\Div}{div}
+
+\DeclareMathOperator{\Arm}{arm}
+\DeclareMathOperator{\Stick}{stick}
+
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{hope}[theorem]{Potentially Provable Lemma}
+\newtheorem{assumption}{Useful Assumption}
+\hfuzz=20pt
+
+%%%%%%%% 
+
+\newcommand{\calD}{\mathcal{D}}
