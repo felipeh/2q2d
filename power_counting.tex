@@ -1,0 +1,61 @@
+\documentclass[11pt]{amsart}
+
+\input{header.tex}
+
+\title{Power counting for RBM}
+\begin{document}
+\maketitle
+
+All I try to do in this note is decipher [ER] to confirm that the bounds from solving the SDE are consistent.
+So everything is in their notation.
+
+Let 
+\begin{align*}
+(\Upsilon_t)_{xy} = \frac{1}{\ell_t \eta_t} \chi(|x-y| \leq \ell_t),
+\end{align*}
+be a control function with $\ell_t = W/\sqrt{\eta_t} $ the localization length of the diffusion profile. Therefore, we should think that $\Theta_t \sim \Upsilon_t$, pointwise, where $\Theta_t$ is the diffusion profile.
+
+Let
+\begin{align*}
+\calY_t^{2}(x) = G_t S^{x} G_t^{*} - M_{[1,2],t}(x)
+\end{align*}
+be the matrix-valued function of $x \in  \bbZ^{d}$, where $M_{[1,2]}(x)$ is a diagonal matrix with $aa$ entry $\Theta_{ax}$.
+
+Up to some small power losses, the target pointwise estimate for $\calY^{2}_t$ is
+\begin{align*}
+\left| \calY^{2}_t \right| \lsim (\ell_t \eta_t)^{-\nf 12} \Upsilon_{t},
+\end{align*}
+so in other words the fluctuations are better by a half power of $\ell_t \eta_t$ compared to the deterministic approximant $M_{[1,2],t}$.
+
+Now we consider the propagator for the SDE $\calP_{s,t}$. Up to a constant factor, it acts like $\eta_s \Theta_t$, where $\Theta_t$ acts by convolution.
+
+Therefore,
+\begin{align*}
+|\calP_{s,t} \Upsilon_s| \les \frac{\eta_s}{\ell_t \eta_t} \frac{1}{\ell_s \eta_s} \chi_{\ell_s} * \chi_{\ell_t} \sim \frac{1}{\ell_t \eta_t} \chi_{\ell_t} = \Upsilon_{t}.
+\end{align*}
+
+Note that this is consistent with the target bound because $\ell_t \eta_t$ decreases with time.
+
+Now let's consider the forcing term. The leading order term is like 
+\begin{align*}
+F_t = G_{t} \calS[G_{t} - m] G_{t} S^{x} G_{t}^{*}.
+\end{align*}
+This is supposed to be $\eta_t$ times the target bound for $\calY^{2}_t$.
+We can see this as follows (I think - I'm using some identity I didn't check carefully based on the definition of $\calS$):
+\begin{align*}
+(G_{t} \calS[G_{t} - m] G_{t} S^{x} G_{t}^{*})_{ab} 
+&= \sum_q \Tr[(G_t - m) S^{q}] (G_{t})_{aq} (G_t S^{x} G_{t}^{*})_{qb}\\
+&\les (\ell_t \eta_t)^{-1} (\ell_t \eta_t)^{-\nf 12} (\ell_t \eta_t)^{-1} \chi_{\ell_t} * \chi_{\ell_t}\\
+&\sim \eta_t^{-1}  (\ell_t \eta_t)^{-\nf 12} (\ell_t \eta_t)^{-1} \chi_{\ell_t}\\
+&\sim \eta_t^{-1} (\ell_t \eta_t)^{-\nf 12} \Upsilon_{t}
+\end{align*} 
+where we have used that we expect $\Tr[(G_t - m) S^{q}] \les (\ell_t \eta_t)^{-1}$.
+
+Now let's see what Duhamel gives:
+\begin{align*}
+\int_{t_{\text{int}}}^{t}  \calP_{s,t}[F_s] \:ds 
+\les \int_{t_{\text{int}}}^{t} \eta_s^{-1} (\ell_s \eta_s)^{-\nf 12} \Upsilon_t \:ds\\
+\les (\ell_t \eta_t)^{-\nf 12} \Upsilon_t,
+\end{align*}
+which is the target bound \smiley
+\end{document}
