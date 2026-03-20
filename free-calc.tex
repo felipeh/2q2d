@@ -1,0 +1,175 @@
+\documentclass[11pt]{amsart}
+
+\include{header.tex}
+
+\newcommand{\bs}{\boldsymbol}
+
+\title{Preliminary hierarchy computations}
+
+\begin{document}
+\maketitle
+
+\section{The basics}
+I am regurgitating below what I understand from Felix Parraud's notes.
+
+We are going to work on a product space
+$\mcal{M}_N(\mcal{A}) = \mcal{C}^{N\times N} \otimes \mcal{A}$ (this is a space
+of operators really), so elements of $\mcal{M}_N$ are $N\times N$ matrices where
+each operator is an element of the $C^\star$ algebra $\mcal{A}$.  I am thinking here
+that $N$ is the number of sites in our periodic lattice $\bbZ^2/n\bbZ^2$ (so $N=n^2$).
+The trace on the $\mcal{A}$ is $\tau$, and is normalized so that $\tau(1)=1$,
+where $1$ is the identity element.   You can imagine $\mcal{A}$ as being $\mcal{C}^{L\times L}$ where $L\gg N$ is a huge number, and the semicircular elements of
+$\mcal{A}$ are GOEs.
+
+Precisely, a free semicircular family $\{s_x\} \subset \mcal{A}$ is a set of elements
+which satisfy $s_x^* = s_x$ and for any sequence $(x_1,\cdots,x_k)$ without immediate
+repeats ($x_j \not= x_{j+1}$)
+\[
+\tau(\prod (s_{x_j} - \tau(s_{x_j}))) = 0,
+\]
+and also
+\[
+\tau(s_x^k) = \begin{cases} c_{k/2}, &\text{if }k\in2\bbZ, \\ 0, &\text{ else.}\end{cases},
+\]
+where $c_n$ is the $n$-th Catalan number.
+
+We need the non-commutative derivative $\partial_x$, which is a map
+$\partial_x: \mcal{A}\to \mcal{A}\otimes \mcal{A}$.  It is defined so that
+\begin{align*}
+\partial_x(AB) &= \partial_x A (1\otimes B) + (A\otimes 1) \partial_x B \\
+\partial_x s_y &= \delta_{xy} 1\otimes 1 \\
+\partial_x (H-z)^{-1} &= - ((H-z)^{-1} \otimes 1) (\partial_x H) (1\otimes (H-z)^{-1}).
+\end{align*}
+I should say here that we should actually work on some extension $\mcal{F}$ of $\mcal{A}$, which includes $s_x$, all expressions like $A\otimes s_x$ for Hermitian $A\in\mcal{C}^{N\times N}$, and also all inverses like $(H-z)^{-1}$ when $z\in\bbC\setminus \bbR$.  And then in this case the derivative above is intended to
+be a definition.  That is, you can sort of think of $\mcal{A}$ as just a list of
+formal expressions, and the derivative is a rule for manipulating formal expressions.
+
+What is not a definition but now a \textit{theorem} is the following result.
+For $Q\in\mcal{A}$,
+\[
+\tau(s_x Q(\vec{s})) = (\tau\otimes \tau)(\partial_x Q(\vec{s})).
+\]
+The trace $\tau\otimes \tau$ on $\mcal{A}\otimes \mcal{A}$ is defined by linearity
+and by $(\tau\otimes \tau)(A\otimes B) = \tau(A)\tau(B)$.
+
+\section{Application to Anderson.}
+Let $\Delta$ be the Laplacian matrix on a finite torus with $N$ total sites.
+Let $\delta_x$ be the diagonal matrix on $\bbC^{N\times N}$ with a $1$ at site $x$.
+Make the matrix $H\in\mcal{M}_N(\mcal{A})$
+\[
+H = \Delta \otimes 1 + \lambda \sum_x \delta_x \otimes s_x =: \Delta + \lambda W
+\]
+where $\{s_x\}$ is a free semicircular family.
+Let's compute the resolvent.  Set
+\[
+M_\theta := (\Delta - (z+\lambda^2\theta))^{-1}.
+\]
+Then
+\[
+(H-z)^{-1} = M_\theta\otimes 1 - (M_\theta\otimes 1)
+(\lambda W + \lambda^2\theta) (H-z)^{-1}
+\]
+(this is an algebra identity valid also on $\mcal{M}_N(\mcal{A})$.
+The non-commutative derivative (extended of course to $\mcal{M}_N(\mcal{A})$.
+becomes
+\[
+\partial_x (H-z)^{-1} = -((H-z)^{-1}\otimes 1) (\delta_x\otimes 1) (1 \otimes (H-z)^{-1})
+\]
+So we'll need to compute
+\begin{align*}
+\tau(W (H-z)^{-1})
+&= \sum_x \delta_x \tau(s_x (H-z)^{-1}) \\
+&= \sum_x \delta_x (\tau\otimes\tau)(\partial_x (H-z)^{-1}) \\
+&= -\lambda \sum_x \delta_x
+(\tau\otimes\tau)((H-z)^{-1}\otimes 1) (\delta_x\otimes 1\otimes 1) (1\otimes  (H-z)^{-1}) \\
+&= -\lambda \sum_x \delta_x
+\tau((H-z)^{-1})\delta_x \tau((H-z)^{-1}).
+\end{align*}
+Setting $R = \tau((H-z)^{-1}) \in \bbC^{N\times N}$, the
+above becomes
+\[
+\tau(W(H-z)^{-1}) = -\lambda \mcal{D}[R] R,
+\]
+so we obtain
+\[
+R = M_\theta + \lambda^2 M_\theta (\mcal{D}[R]-\theta) R.
+\]
+Setting $\theta = \mcal{D}[R]$ we get that $R=M_\theta$ with the usual value of $\theta$.
+
+Set now
+\[
+H_t-z_t := \Delta + \lambda \sqrt{t} W - \eg - (1-t)\lambda^2\theta,
+\]
+and define $\mcal{R}_t := (H_t-z_t)^{-1}$.
+Note that with this definition, $\tau(\mcal{R}_t) = M_\theta$ is constant in time
+with the same value of $\theta$.
+
+We are interested in $k$-loops,
+\[
+K_t(x_1,\cdots,x_k) := \tr \tau(\prod_{j=1}^k \delta_{x_j} \mcal{R}_t(\sigma_j)),
+\]
+where $\mcal{R}_t(-) := \mcal{R}_t^*$ and $\mcal{R}_t(+) := \mcal{R}_t$.  For
+now let's drop that notation because it shouldn't matter for the algebra.
+
+So I want to compute $\partial_t K_t(\vec{x})$.  Note that
+\[
+\partial_t \mcal{R}_t = - \mcal{R}_t (\frac{\lambda}{2\sqrt{t}}W + \lambda^2\theta)
+\mcal{R}_t.
+\]
+Later we'll also need
+\[
+\partial_z \mcal{R}_t = -\lambda \sqrt{t} (\mcal{R}_t \otimes 1) \delta_z (1\otimes \mcal{R}_t).
+\]
+So:
+\begin{align*}
+\partial_t K_t(\vec{x})
+= -\sum_{j_0=1}^k
+\tr \tau( (\prod_{j<j_0} \delta_{x_j}\mcal{R}_t)
+\delta_{x_{j_0}} \mcal{R}_t (\frac{\lambda}{2\sqrt{t}} W + \lambda^2\theta)\mcal{R}_t
+(\prod_{j>j_0} \delta_{x_j} \mcal{R}_t)).
+\end{align*}
+Let's compute the term with $j_0=1$ (by the cyclic property of the trace this is the
+only case to worry about anyway):
+\begin{align*}
+-\tr \tau (\delta_{x_1} \mcal{R}_t (\frac{\lambda}{2\sqrt{t}}W + \lambda^2 \theta)
+\mcal{R}_t (\prod_{j>1} \delta_{x_j}\mcal{R}_t)) &=
+- \sum_z \tr\tau(\delta_{x_1} \mcal{R}_t (\frac{\lambda}{2\sqrt{t}}\delta_z\otimes s_z
++ \lambda^2 \theta) \mcal{R}_t (\prod_{j>1} \delta_{x_j} \mcal{R}_t))
+\end{align*}
+We are going to integrate by parts in $s_z$, using the product rule
+(you can use the cyclic property of the trace again to put the $s_z$ on the left if you
+prefer, to make the integration by parts and the product rule more familiar).
+Let's first worry about the derivative that hits the $\mcal{R}_t$ all the way on the
+left:
+\begin{align*}
+\frac{\lambda}{2\sqrt{t}}
+\sum_z
+-\tr (\tau\otimes\tau) (\delta_{x_1} &(\partial_z\mcal{R}_t) \delta_z
+((\mcal{R}_t (\prod_{j>1} \delta_{x_j}\mcal{R}_t))\otimes 1))  \\
+&= \frac{\lambda^2}{2} \sum_z \tr(\tau\otimes \tau)
+(\delta_{x_1}(\mcal{R}_t\otimes 1) \delta_z (1\otimes \mcal{R}_t) \delta_z (\mcal{R}_t (\prod_{j>1} \delta_{x_j}\mcal{R}_t))\otimes 1) \\
+&= \frac{\lambda^2\theta}{2} \sum_z \tr \tau(\delta_{x_1}\mcal{R}_t \delta_z \mcal{R}_t
+\prod_{j>1} \delta_{x_j} \mcal{R}_t).
+\end{align*}
+The same exact term appears when the derivative hits the $\mcal{R}_t$ immediately to
+the right of $\theta$, and this cancels the $\theta$.  Therefore, using
+the cylic property of the trace to rearrange the remaining
+\begin{align*}
+-\tr \tau (\delta_{x_1} \mcal{R}_t &(\frac{\lambda}{2\sqrt{t}}W + \lambda^2 \theta)
+\mcal{R}_t (\prod_{j>1} \delta_{x_j}\mcal{R}_t))\\
+&=-\frac{\lambda}{2\sqrt{t}}\sum_z
+\tr(\tau\otimes \tau)
+((\mcal{R}_t\otimes 1) \partial_z(\prod_{j>1} \delta_{x_j}\mcal{R}_t) \delta_{x_1}(1\otimes \mcal{R}_t)) \\
+&= \frac{\lambda^2}{2}
+\sum_z \sum_{j'>1} \tr(\tau\otimes \tau)
+((\mcal{R}_t\otimes 1) (\prod_{1<j<j'} \delta_{x_j}\mcal{R}_t \otimes 1)
+\delta_{x_{j'}}
+(\mcal{R}_t\otimes 1) \delta_z (1\otimes \mcal{R}_t) (\prod_{j>j'} \delta_{x_j}\mcal{R}_t) ( 1\otimes \mcal{R}_t)) \\
+&= \frac{\lambda^2}{2} \sum_z \sum_{j'>1}K_t(x_1,z,x_{j'+1},\dots,x_k)
+K_t(z,x_2,\cdots,x_{j'}).
+\end{align*}
+This accounts for the cuts \textit{from} the $x_1$-$x_2$ edge, and summing over all
+edges gives us all the cuts (and the factor of $\frac12$ accounts for the double-counting).
+
+
+\end{document}

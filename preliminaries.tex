@@ -1,9 +1,9 @@
-\documentclass[11pt]{amsart}
+\ocumentclass[11pt]{amsart}
 
 \include{header.tex}
 
 \newcommand{\bs}{\boldsymbol}
-	
+
 
 \title{Preliminary hierarchy computations}
 
@@ -23,7 +23,7 @@ Here, for $z\in \bbH$, $\theta(z)$ is defined to be the unique solution to be th
 \end{align*}
 whereas for $E \in R$ we let $\theta(E) = \lim_{\eta \to 0}\theta(E+ i\eta)$.
 
-For $x\in  \bbZ^{d}$, let $S_{x}$ be the matrix $(S_{x})_{ab} = \delta_{ax} \delta_{bx}$. 
+For $x\in  \bbZ^{d}$, let $S_{x}$ be the matrix $(S_{x})_{ab} = \delta_{ax} \delta_{bx}$.
 For $\bs \sigma = (\sigma_1,\ldots,\sigma_k) \in \{\pm \}^{k}$, and $\bs x = (x_1,\ldots,x_k) \in  (\bbZ^{d})^{k}$ let
 \begin{align*}
 R_{t,\bs \sigma}(\bs x) =   R_t^{\sigma_1} S_{x_1} R_t^{\sigma_2}S_{x_2} \cdots R_t^{\sigma_k} S_{x_k} ,
@@ -36,16 +36,16 @@ Let  $\calD[\left( \cdot \right)]:= \sum_{x} S_x \left( \cdot \right)  S_x$ be t
 
 \begin{proposition}
 The matrix $R_{t}$ solves the SDE
-\begin{align*}	
+\begin{align*}
 dR_t = \lambda^{2} R_t \left( \calD[R_t] - \theta(E_0)  \right)  R_t \: dt  -  \lambda R_t\: dW_t\: R_t.
 \end{align*}
 \end{proposition}
 \begin{proof}
-Using that 
+Using that
 \begin{align*}
 \frac{dR_t}{dt} &= -\lambda^{2} \theta(E_0) R^{2}_t\\
 \frac{dR_t}{dW_x} &= - \lambda R_t S_x R_t\\
-\frac{d^{2}R_t}{dW_xdW_y} &=  \lambda^{2}\left(  R_t S_x R_t S_y R + R_t S_x R_t S_y R_t \right)  
+\frac{d^{2}R_t}{dW_xdW_y} &=  \lambda^{2}\left(  R_t S_x R_t S_y R + R_t S_x R_t S_y R_t \right)
 \end{align*}
 the result follows immediately from It\^{o}'s formula.
 \end{proof}
