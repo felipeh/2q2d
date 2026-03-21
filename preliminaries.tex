@@ -1,6 +1,6 @@
 \ocumentclass[11pt]{amsart}
 
-\include{header.tex}
+\input{header.tex}
 
 \newcommand{\bs}{\boldsymbol}
 
@@ -23,12 +23,14 @@ Here, for $z\in \bbH$, $\theta(z)$ is defined to be the unique solution to be th
 \end{align*}
 whereas for $E \in R$ we let $\theta(E) = \lim_{\eta \to 0}\theta(E+ i\eta)$.
 
-For $x\in  \bbZ^{d}$, let $S_{x}$ be the matrix $(S_{x})_{ab} = \delta_{ax} \delta_{bx}$.
-For $\bs \sigma = (\sigma_1,\ldots,\sigma_k) \in \{\pm \}^{k}$, and $\bs x = (x_1,\ldots,x_k) \in  (\bbZ^{d})^{k}$ let
+For $x\in  \bbZ^{d}$, let $S_{x}$ be the matrix $(S_{x})_{ab} = \delta_{ax} \delta_{bx}$. 
+\AB{This is a choice we make for the sake of concreteness and may later find that we instead want to consider observables that average over the kinetic scale.}
+In the parlance of [ER] we focus on \emph{saturated chains} so for $p<j\leq k$ and $\bs x = (x_1,\ldots,x_k) \in  (\bbZ^{d})^{k}$ we merely define
 \begin{align*}
-R_{t,\bs \sigma}(\bs x) =   R_t^{\sigma_1} S_{x_1} R_t^{\sigma_2}S_{x_2} \cdots R_t^{\sigma_k} S_{x_k} ,
+R_{[j,p],t}(\bs x)  = R_t^{\pm} S^{x_p} R_t^{\pm} S^{x_{p+1}} \cdots S^{x_{j-1}} R_t^{\pm}
 \end{align*}
-where $R_t^{+} = R_t$ and $R_t^{-} = R_t^{*}$. We think of this as a matrix-valued function of $\bs x$ (though we might be able to get away with taking a trace).
+where $R_t^{+} = R_t$ and $R_t^{-} = R_t^{*}$, and the signs always alternate starting with $+$ when $p$ is odd and $-$ when $p$ is even. 
+We think of this as a matrix-valued function of $\bs x$.
 
 We use the convention that for $k \in \bbN$, $R_{t,k} =  R_{t,(+,-,\ldots,+,-)}$.
 
@@ -55,4 +57,23 @@ Ignoring the second term, we observe that a solution to the ODE
 dM_t = \lambda^{2} M_t \left( \calD[M_t] - \theta(E_0) \right) M_t \: dt
 \end{align*}
 is the constant in time matrix $M_{t} = \left(\Delta - (E_0 + \lambda^{2} \theta(E_0)\right)^{-1}$
+
+\section{Two loops}
+Consider the second order \emph{isotropic} chain
+\begin{align*}
+R_{[1,2],t} = R_t S^{x_1} R_t^{*}.
+\end{align*}
+Isotropic here means that we still think of this chain as a matrix, rather than the averaged $2$-chain
+\begin{align*}
+\Tr R_t S^{x_1} R_t^{*} S^{x_2}.
+\end{align*}
+We expect to have to consider both eventually.
+
+By It\^{o} calculus as above, we have the following
+\begin{proposition}
+The $2$-chain $R_{[1,2],t}$ solves the SDE
+\begin{align*}
+d R_{[1,2],t} = \lambda^{2} \Theta_t[R_{[1,2],t}] \: dt
+\end{align*}
+\end{proposition}
 \end{document}
