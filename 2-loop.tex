@@ -1,0 +1,108 @@
+\documentclass[11pt]{amsart}
+
+\input{header.tex}
+
+
+\title{2-loop RBM analysis}
+
+\begin{document}
+\maketitle
+The goal of this note is to explain how [ER] estimate the averaged 2-loop observable.
+
+Let 
+\begin{align*}
+\calS[A]_{ab} := \delta_{ab} \sum_{c} S_{ac} A_{cc}
+\end{align*}
+and for later use we note that
+\begin{align*}
+A \calS[B] C = \sum_{d} B_{dd} A S^{d} C
+\end{align*}
+
+Let
+\begin{align*}
+G_{[1,2],t} = G_t S^{x_1} G_t^*,
+\end{align*}
+which we think of as a matrix-valued function of $x_1$.
+Its deterministic approximation is given by
+\begin{align*}
+(M_{[1,2],t}(x_1))_{ab} = \delta_{ab}\Theta_{ax_1},
+\end{align*}
+which is another matrix-valued function, this time only diagonal and given in terms of the diffusion profile $\Theta$.
+
+The diffusion profile acts linearly on functions (matrix-valued or otherwise) separately in each coordinate via
+\begin{align*}
+\Theta^{(j)}[f](\bs x) = \sum_{q} \Theta_{x_j q} f(x_1,\ldots,x_{j-1},q,x_{j+1},\ldots x_k)
+\end{align*}
+
+The averaged 2-loop is 
+\begin{align*}
+\calX^{2}_t(x_1,x_2) = \Tr[(G_{[1,2],t} - M_{[1,2],t}) S^{x_{2}})].
+\end{align*}
+
+For given imaginary part $\eta_s$, let $\Upsilon_s$ be the control function $(\Upsilon_s)_{ab} = \frac{1}{\ell_s \eta_s}\chi(|a-b|\leq \ell_s)$, where $\ell_s$ is the diffusive length-scale $W/\sqrt{\eta_s} $.
+The point is that $\Tr[M_{[1,2],t}(x_1)\calS^{x_2}]\les \Upsilon_{x_1x_2}$, so the goal is to show that
+$\calX^{2}$ is $\ell \eta$ better, i.e.
+\begin{align*}
+|\calX^{2}(x_1,x_2)| \prec (\ell \eta)^{-1} \Upsilon_{x_1x_2}.
+\end{align*}
+Really what we want to understand is why if we assume such a bound at some $s$ then the equation propagates it to time $t>s$. 
+
+First, let's record the SDE satisfied by $\calX^{2}$
+\begin{proposition}
+We have that $\calX^{2}$ solves
+\begin{align*}
+&d\calX^{2} = (\Theta^{(1)}[\calX^{2}] + \Theta^{(2)}[\calX^{2]}])\:dt+ \calF + \calM,\\
+&\begin{aligned}
+\calF &=   - \sum_{q} \left( G_{[1,2],t }(x_1) - M_{[1,2],t}(x) \right)_{qq} \Tr[\left( G_{[1,2],t}(q) - M_{[1,2],t}(q) \right)S^{x_2}]\\
+&\quad + \left(G_t (\calS[G_t] - m) G_t   \right) S^{x_1} G_t^{*} + c.c.\\
+\calM &=  - G_t \: dB_t \: G_t S^{x_1} G_t^{*} + c.c.
+\end{aligned}
+\end{align*}
+\end{proposition}
+\begin{proof}
+We first compute
+\begin{align*}
+dG_t = G_t (\calS[G_t] - m) G_t\:dt - G_t\:dB_t\:G_t
+\end{align*}
+
+We compute further that
+\begin{align*}
+dG_{[1,2],t} &= G_t \calS[G_t S^{x_1} G_t^{*}] G_t^{*}\: dt\\
+&\quad + \left(G_t (\calS[G_t] - m) G_t   \right) S^{x_1} G_t^{*} + c.c.\\
+&\quad - G_t \: dB_t \: G_t S^{x_1} G_t^{*} + c.c.
+\end{align*}
+Note that
+\begin{align*}
+(G_t \calS[G_t S^{x_1} G_t^{*}] G_t^{*})_{ab} 
+&= \sum_{q} \calS[G_t S^{x} G_t^{*}]_{qq}  (G_t)_{aq} (G^{*}_{t})_{qb}\\
+&= \sum_q \sum_{q'}S_{qq'} (G_t S^{x} G_t^{*})_{qq'} (G_t)_{aq} (G^{*}_{t})_{qb}\\
+&= \sum_{q'} (G_{[1,2],t}(x))_{q'q'} (G_{[1,2],t}(q'))_{ab}
+\end{align*}
+and therefore,
+\begin{align*}
+d(G_{[1,2]t}(x_1) - M_{[1,2],t}(x_1)) 
+&= \sum_{q} \left( G_{[1,2],t }(x_1) - M_{[1,2],t}(x_1) \right)_{qq} M_{[1,2],t}(q)\\
+&\quad +\sum_q \left( M_{[1,2],t}(x_1)\right)_{qq} \left( G_{[1,2],t}(q) - M_{[1,2],t}(q) \right) \\
+&\quad - \sum_{q} \left( G_{[1,2],t }(x_1) - M_{[1,2],t}(x) \right)_{qq} \left( G_{[1,2],t}(q) - M_{[1,2],t}(q) \right)\\
+&\quad + \left(G_t (\calS[G_t] - m) G_t   \right) S^{x_1} G_t^{*} + c.c.\\
+&\quad - G_t \: dB_t \: G_t S^{x_1} G_t^{*} + c.c.
+\end{align*}
+Note that
+\begin{align*}
+\Tr\left[ M_{[1,2],t}(q)S^{x_2} \right]  
+&= \sum_{q'} \Theta_{qq'}S_{q'x_2}\\
+&= (\Theta S)_{qx_2}\\
+&= (S \Theta)_{qx_2}\\
+&= \sum_{q'}S_{qq'} \Theta_{q'x_2},
+\end{align*}
+since $\Theta$ commutes with $S$ by definition.
+
+Multiplying by $S^{x_2}$ and taking traces, we find by the above that
+\begin{align*}
+\Tr(\sum_{q} \left( G_{[1,2],t }(x_1) - M_{[1,2],t}(x_1) \right)_{qq} M_{[1,2],t}(q) S^{x_2})
+=  \Theta^{(2)}[\calX^{2}](x_1,x_2)
+%\sum_{q'}\sum_{q} (M_{[1,2],t}(q))_{q'q'} \left( G_{[1,2],t }(x_1) - M_{[1,2],t}(x_1) \right)_{qq}S_{qx_2}
+\end{align*}
+The first term becomes $\Theta^{(1)}[\calX^{2}](x_1,x_2)$, so the claim follows.
+\end{proof}
+\end{document}
